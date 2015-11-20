@@ -56,3 +56,15 @@ function saveFile() {
 	});
 }
 
+var fs = require('fs');
+
+/**
+ *  ファイルを書き込む
+ */
+function writeFile(path, data) {
+    fs.writeFile(path, data, function (error) {
+	if (error != null) {
+	    alert('error : ' + error);
+	}
+    });
+}
