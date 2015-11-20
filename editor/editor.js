@@ -28,3 +28,31 @@ function openLoadFile() {
 	    }
 	});
 }
+
+/**
+ *  ファイルを保存する
+ */
+function saveFile() {
+    if (currentPath == "") {
+	saveNewFile();
+	return;
+    }
+
+    var win = browserWindow.getFocusedWindow();
+
+    dialog.showMessageBox(
+	win,
+	{
+	    title   : 'ファイルの上書き保存を行います．',
+	    type    : 'info',
+	    buttons : ['OK', 'Cancel'],
+	    detail  : '本当に保存しますか?'
+	},
+	function (response) {
+	    if (response == 0) {
+		var data = editor.getValue();
+		writeFile(currentPath, data)
+	    }
+	});
+}
+
