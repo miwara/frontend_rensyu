@@ -14,8 +14,8 @@ var editor = null;
  *  Webページ読み込み時の処理
  */
 function onLoad() {
-    inputArea = document.getElementById("input.area");
-    inputTxt = document.getElementById("input.txt");
+    inputArea = document.getElementById("input_area");
+    inputTxt = document.getElementById("input_txt");
     footerArea = document.getElementById("footer_fixed");
 
     editor = ace.edit("input_txt");
@@ -28,7 +28,7 @@ function onLoad() {
 	return false;
     };
 
-    inputArea.ondragover = Function () {
+    inputArea.ondragover = function () {
 	return false;
     };
 
@@ -57,7 +57,7 @@ function openLoadFile() {
 	    filters : [
 		{
 		    name : 'Documents',
-		    extensions : ['txt', 'text', 'html']
+		    extensions : ['txt', 'text', 'html', 'js']
 		}
 	    ]
 	},
@@ -105,7 +105,7 @@ function saveFile() {
 	function (response) {
 	    if (response == 0) {
 		var data = editor.getValue();
-		writeFile(currentPath, data)
+		writeFile(currentPath, data);
 	    }
 	});
 }
@@ -117,6 +117,7 @@ function writeFile(path, data) {
     fs.writeFile(path, data, function (error) {
 	if (error != null) {
 	    alert('error : ' + error);
+	    return;
 	}
     });
 }
