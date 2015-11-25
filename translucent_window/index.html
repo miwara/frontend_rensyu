@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='UTF-8'>
+    <title>半透明テスト</title>
+    <style>
+      html { height: 100%; width: 100% }
+      body {
+      -webkit-app-region: drag;
+      -webkit-user-select: none;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+      opacity: 0.5;
+      }
+      #main {
+      height: 100%;
+      width: 100%;
+      backgraound-color: black;
+      color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div id='main'>半透明のウィンドウ</div>
+  </body>
+</html>
