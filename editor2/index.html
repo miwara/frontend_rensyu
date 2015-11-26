@@ -1,40 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
     <style>
-      * {padding:0; margin:0; box-sizing:border-box;}
+      * {padding:0px; margin:0px;}
+      html, body {background-color:#lelele; overflow: hidden;}
       html, body, #editor {width:100%; height:100%;}
     </style>
-    <script>
-      require('ace-min-noconflict');
-      require('ace-min-noconfilict/mode-javascript');
-
-      var editor;
-      window.onload = function() {
-      editor = ace.edit("editor");
-      editor.getSession().setMode('ace/mode/javascript');
-      };
-
-      function openFile(file) {
-      require('fs').readFile(file, 'utf8', function(err, data) {
-      editor.setValue(data, -1);
-      });
-      }
-
-      document.ondragover = funciton(e) {
-      e.preventDefault();
-      return false;
-      }
-
-      document.ondrop = function(e) {
-      e.preventDefault();
-      if(e.dataTransfer.files[0]) {
-      var file = e.dataTransfer.files[0].path;
-      if(/\.js$/.test(file)) { openFile(file); }
-      }
-      return false;
-      }
-    </script>
-  <head>
-    <body><div id="editor"></div></body>
+    <script src="node_modules/ace-min-noconflict/ace.js"></script>
+    <script src="node_modules/ace-min-noconflict/mode-javascript.js"></scirpt>
+    <script src="node_modules/ace-min-noconflict/theme-twilight.js"></script>
+    <script src="editor.js"></script>
+  </head>
+<body onload="onLoad()">
+  <div><button type="button" class="btn-sm btn-primary" onclick="openLoadFile()">読み込み</button></div>
+  <div id="editor"></div>
+</body>
 </html>
