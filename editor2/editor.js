@@ -11,10 +11,8 @@ function onLoad() {
 };
 
 function openLoadFile(file) {
-    var win = browserWindow.getFocusedWindow();
-
     dialog.showOpenDialog(
-	win,
+	browserWindow.getFocusedWindow(),
 	{
 	    properties: ['openFile'],
 	    filters: [
@@ -25,16 +23,13 @@ function openLoadFile(file) {
 	    ]
 	},
 	function (filenames) {
-	    if (filenames)
-	    {
+	    if (filenames) {
 		readFile(filenames[0]);
 	    }
-
 	});
 }
 
 function readFile(path) {
-    currentPath = path;
     fs.readFile(path, function (error, text) {
 	if (error != null) {
 	    alert('error : ' + error);
