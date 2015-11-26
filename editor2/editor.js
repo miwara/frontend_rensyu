@@ -8,7 +8,7 @@ function onLoad() {
     editor = ace.edit("editor");
     editor.getSession().setMode('ace/mode/javascript');
     editor.setTheme("ace/theme/twilight");
-};
+}
 
 function openLoadFile(file) {
     dialog.showOpenDialog(
@@ -31,7 +31,7 @@ function openLoadFile(file) {
 
 function readFile(path) {
     fs.readFile(path, function (error, text) {
-	if (error != null) {
+	if (error !== null) {
 	    alert('error : ' + error);
 	    return;
 	}
