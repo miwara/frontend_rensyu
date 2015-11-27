@@ -7,6 +7,10 @@ var editor = null;
 function onLoad() {
     editor = ace.edit("editor"); /* 入力エリアを指定 */
     editor.getSession().setMode('ace/mode/javascript'); /* シンタックスのモードを javascript に */
+    editor.$blockScrolling = Infinity;
+    if (process.platform == 'darwin') {
+	editor.commands.bindKey("Ctrl-P", "golineup");
+    }
 }
 
 function openLoadFile(file) {
