@@ -3,6 +3,7 @@ var remote = require('remote'); /* http://qiita.com/Misumi_Rize/items/a434cc0d17
 var dialog = remote.require('dialog');
 var browserWindow = remote.require('browser-window'); /* http://electron.atom.io/docs/v0.35.0/api/browser-window/ */
 var editor = null;
+var currentPath = null;
 
 function onLoad() {
     editor = ace.edit("editor"); /* 入力エリアを指定 */
@@ -26,13 +27,12 @@ function openLoadFile(file) {
 	    ]
 	},
 	function (filenames) {
-	    if (filenames) {
-		readFile(filenames[0]);
-	    }
+	    if (filenames) readFile(filenames[0]);
 	});
 }
 
 function readFile(path) {
+    currentPath = path;
     fs.readFile(path, function (error, text) {
 	if (error !== null) {
 	    alert('error : ' + error);
@@ -41,4 +41,16 @@ function readFile(path) {
 
 	editor.setValue(text.toString(), -1); /* エディタにセット */
     });
+}
+
+function saveFile() {
+    fs.writeFile(
+	currentPath,
+	editor.getValue(),
+	function (error) {
+	    if (error !== null) {
+		alert('error : ' + error);
+		return;
+	    }
+	});
 }
