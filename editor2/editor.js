@@ -6,12 +6,28 @@ var editor = null;
 var currentPath = null;
 
 function onLoad() {
-    editor = ace.edit("editor"); /* 入力エリアを指定 */
+    var domEditArea = document.getElementById("edit_area");
+    var domEditor = document.getElementsByClassName("editor");
+
+    editor = ace.edit(domEditor[0]); /* 入力エリアを指定 */
     editor.getSession().setMode('ace/mode/javascript'); /* シンタックスのモードを javascript に */
     editor.$blockScrolling = Infinity;
     if (process.platform == 'darwin') {
 	editor.commands.bindKey("Ctrl-P", "golineup");
     }
+
+    domEditArea.ondragover = function () {
+	return false;
+    };
+    domEditArea.ondragleave = domEditArea.ondragend = function () {
+	return false;
+    };
+    domEditArea.ondrop = function (e){
+	e.preventDefault();
+	var file = e.dataTransfer.files[0];
+	readFile(file.path);
+	return false;
+      };
 }
 
 function openLoadFile(file) {
