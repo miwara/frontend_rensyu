@@ -1,6 +1,11 @@
 function onLoad() {
     var holder = document.getElementById('holder');
 
+    document.ondragover = document.ondrop = Function (e) {
+	e.preventDefault(); // イベントの伝搬をやめて，アプリケーションのhtmlとファイルが差し替わらないようにする
+	return false;
+    };
+
     /** holderエリアにドラッグされた場合 */
     holder.ondragover = function() {
 	return false;
@@ -13,7 +18,7 @@ function onLoad() {
 
     /** holderエリアにドロップされた */
     holder.ondrop = function (e) {
-	e.preventDefault(); // イベントの伝搬をやめて，アプリケーションのhtmlとファイルが差し替わらないようにする
+	e.preventDefault();
 
 	var file = e.dataTransfer.files[0];
 	holder.innerText = file.name;
