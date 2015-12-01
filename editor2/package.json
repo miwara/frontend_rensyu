@@ -1,0 +1,8 @@
+{
+  "name": "editor2",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {
+    "ace-min-noconflict": "^1.1.9"
+  }
+}
