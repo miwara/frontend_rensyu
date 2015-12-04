@@ -1,5 +1,8 @@
 var d3 = require('./node_modules/d3/d3.min.js');
 
+/**
+ *  CSVの内容を表示
+ */
 d3.csv("./data.csv", function(error, list) {
     d3.select("#result")
 	.append("table")
@@ -12,7 +15,6 @@ d3.csv("./data.csv", function(error, list) {
 	    return d["value"];
 	})
 });
-
 
 
 /**
