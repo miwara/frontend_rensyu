@@ -1,7 +1,7 @@
 function onLoad() {
     var holder = document.getElementById('holder');
 
-    document.ondragover = document.ondrop = Function (e) {
+    document.ondragover = document.ondrop = function(e) {
 	e.preventDefault(); // イベントの伝搬をやめて，アプリケーションのhtmlとファイルが差し替わらないようにする
 	return false;
     };
