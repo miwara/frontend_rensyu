@@ -1,4 +1,5 @@
-var fs = require('fs');
+var fs = require('fs'),
+    path = require('path');
 
 function onLoad() {
     var holder = document.getElementById('holder');
@@ -22,24 +23,37 @@ function onLoad() {
     holder.ondrop = function (e) {
 	e.preventDefault();
 
-	getFilelist(e.dataTransfer.files[0].path);
+	walk(e.dataTransfer.files[0].path, function(err, results) {
+	    if (err) throw err;
+	    var data = {name:'root', children:results};
+	    console.log(JSON.stringify(data));
+	});
 
 	return false;
     };
 
-    /**
-     * 受け取ったパス内の全ファイルを取得しコンソールに表示
-     *
-     * @param {string} path ファイルパス
-     */
-    function getFilelist(path) {
-	fs.readdir(path, function(err, files) {
+    var walk = function(p, callback) {
+	var results = [];
+
+	fs.readdir(p, function(err, files) {
 	    if (err) throw err;
-	    var fileList = [];
-	    files.forEach(function (file) {
-		fileList.push(file);
+
+	    var pending = files.length;
+	    if (!pending) return callback(null, results);
+
+	    files.map(function (file) {
+		return path.join(p, file);
+	    }).filter(function (file) {
+		if (fs.statSync(file).isDirectory()) walk(file, function(err, res) {
+		    results.push({name:path.basename(file), children:res});
+		    if (!--pending) callback(null, results);
+		});
+		return fs.statSync(file).isFile();
+	    }).forEach(function (file) {
+		var stat = fs.statSync(file);
+		results.push({file:path.basename(file), size:stat.size});
+		if (!--pending) callback(null, results);
 	    });
-	    console.log(fileList);
 	});
-    }
+    };
 }
