@@ -52,4 +52,24 @@ function onLoad() {
 	    });
 	});
     };
+
+    /**
+     * 受け取ったパス内のjpgファイルを取得する
+     *
+     * @param {string} path ファイルパス
+     */
+    function getJPGFilelist(cCatPath, callback) {
+        var fileList = [];
+	fs.readdir(cCatPath, function(err, files) {
+           if (err) throw err;
+
+	    var pending = files.length;
+	    if (!pending) return callback(null, fileList);
+
+            files.forEach(function (file) {
+		fileList.push(file);
+            });
+	    if (!--pending) callback(null, fileList);
+    });
+   }
 }
