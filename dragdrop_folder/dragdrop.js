@@ -1,3 +1,5 @@
+var fs = require('fs');
+
 function onLoad() {
     var holder = document.getElementById('holder');
 
@@ -20,10 +22,24 @@ function onLoad() {
     holder.ondrop = function (e) {
 	e.preventDefault();
 
-	var file = e.dataTransfer.files[0];
-	holder.innerText = file.name;
-	console.log(file.path);
+	getFilelist(e.dataTransfer.files[0].path);
 
 	return false;
     };
+
+    /**
+     * 受け取ったパス内の全ファイルを取得しコンソールに表示
+     *
+     * @param {string} path ファイルパス
+     */
+    function getFilelist(path) {
+	fs.readdir(path, function(err, files) {
+	    if (err) throw err;
+	    var fileList = [];
+	    files.forEach(function (file) {
+		fileList.push(file);
+	    });
+	    console.log(fileList);
+	});
+    }
 }
