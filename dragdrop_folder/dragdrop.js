@@ -23,36 +23,32 @@ function onLoad() {
     holder.ondrop = function (e) {
 	e.preventDefault();
 
-	walk(e.dataTransfer.files[0].path, function(err, results) {
+	var eventDir = e.dataTransfer.files[0];
+	getChildCatsList(eventDir.path, function(err, cCatsList){
 	    if (err) throw err;
-	    var data = {name:'root', children:results};
-	    console.log(JSON.stringify(data));
+	    console.log(cCatsList);
 	});
 
 	return false;
     };
 
-    var walk = function(p, callback) {
-	var results = [];
+    function getChildCatsList(eventPath, callback) {
+	var cCatsList = [];
 
-	fs.readdir(p, function(err, files) {
+	fs.readdir(eventPath, function(err, childCats) {
 	    if (err) throw err;
 
-	    var pending = files.length;
-	    if (!pending) return callback(null, results);
+	    var pending = childCats.length;
+	    if (!pending) return callback(null, cCatsList);
 
-	    files.map(function (file) {
-		return path.join(p, file);
-	    }).filter(function (file) {
-		if (fs.statSync(file).isDirectory()) walk(file, function(err, res) {
-		    results.push({name:path.basename(file), children:res});
-		    if (!--pending) callback(null, results);
-		});
-		return fs.statSync(file).isFile();
-	    }).forEach(function (file) {
-		var stat = fs.statSync(file);
-		results.push({file:path.basename(file), size:stat.size});
-		if (!--pending) callback(null, results);
+	    childCats.map(function (childCat) {
+		return path.join(eventPath, childCat);
+	    }).filter(function (childCat) {
+		if (fs.statSync(childCat).isFile()) throw err;
+		return fs.statSync(childCat).isDirectory;
+	    }).forEach(function (childCat) {
+		cCatsList.push(path.basename(childCat));
+		if (!--pending) callback(null, cCatsList);
 	    });
 	});
     };
