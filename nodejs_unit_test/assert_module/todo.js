@@ -3,7 +3,7 @@ function Todo () {
 }
 
 Todo.prototype.add = function (item) {
-  if (!item) throw new Error('Todo#ad require an item')
+  if (!item) throw new Error('Todo#add requires an item');
   this.todos.push(item);
 }
 

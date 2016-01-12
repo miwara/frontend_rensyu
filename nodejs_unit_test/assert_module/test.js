@@ -28,9 +28,15 @@ function doAsyncTest(cb) {
   });
 }
 
+function throwsTest(cb) {
+  assert.throws(todo.add, /requires/);
+  testsCompleted++;
+}
+
 
 deleteTest();
 addTest();
+throwsTest();
 doAsyncTest(function () {
   console.log('Completed ' + testsCompleted + ' tests');
 });
