@@ -12,5 +12,17 @@ function deleteTest() {
   testsCompleted++;
 }
 
+function addTest() {
+  todo.deleteAll();
+  todo.add('Added');
+  assert.notEqual(todo.getCount(), 0, '1 item should exists');
+
+  testsCompleted++;
+}
+
+
+
 deleteTest();
+addTest();
+
 console.log('Completed ' + testsCompleted + ' tests');
