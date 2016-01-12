@@ -15,7 +15,7 @@ Todo.prototype.getCount = function () {
   return this.todos.length;
 }
 
-Todo.prototype.doAsync = function () {
+Todo.prototype.doAsync = function (cb) {
   setTimeout(cb, 2000, true);
 }
 

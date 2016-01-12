@@ -20,9 +20,17 @@ function addTest() {
   testsCompleted++;
 }
 
+function doAsyncTest(cb) {
+  todo.doAsync(function (value) {
+    assert.ok(value, 'Callback should be passed true');
+    testsCompleted++;
+    cb();
+  });
+}
 
 
 deleteTest();
 addTest();
-
-console.log('Completed ' + testsCompleted + ' tests');
+doAsyncTest(function () {
+  console.log('Completed ' + testsCompleted + ' tests');
+});
