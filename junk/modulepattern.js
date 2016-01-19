@@ -1,3 +1,4 @@
+"use strict";
 var MYAPP = MYAPP || {
   util: {
     math: {}
@@ -9,21 +10,21 @@ var MYAPP = MYAPP || {
 
 MYAPP.util.math = (function() {
 
-  add = function (x, y) {
+  let add = function (x, y) {
     return x + y;
-  },
+  };
 
-  minus = function (x, y) {
+  let minus = function (x, y) {
     return x - y;
-  },
+  };
 
-  multiply = function (x, y) {
+  let multiply = function (x, y) {
     return x * y;
-  },
+  };
 
-  divide = function (x, y) {
+  let divide = function (x, y) {
     return y !== 0 ? x/y : "NaN";
-  }
+  };
 
   return {
     add: add,
@@ -37,3 +38,4 @@ console.log(MYAPP.util.math.add(4,5));
 console.log(MYAPP.util.math.minus(4,5));
 console.log(MYAPP.util.math.multiply(4,5));
 console.log(MYAPP.util.math.divide(4,5));
+console.log(MYAPP);
