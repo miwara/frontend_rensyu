@@ -11,6 +11,7 @@
   "devDependencies": {
     "aws-sdk": "^2.2.31",
     "electron-prebuilt": "^0.36.4",
+    "jquery": "^2.2.0",
     "mocha": "^2.3.4"
   }
 }
