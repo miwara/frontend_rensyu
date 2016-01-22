@@ -2,6 +2,13 @@
 let $ = require("jquery"),
     jQuery = require("jquery");
 
-$(function () {
-  $("#header").css("background-color", "#eee");
+window.addEventListener('DOMContentLoaded', () => {
+
+ $(function () {
+ $("#header").css("background-color", "#eee");
+ });
+
+  let str = $(".test input[name=textform]").val();
+  console.log(str);
+
 });
