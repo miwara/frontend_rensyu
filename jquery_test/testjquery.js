@@ -11,4 +11,9 @@ $(document).ready(() => {
   let str = $(".test input[name=textform]").val();
   console.log(str);
 
+  $(".submit").submit(() => {
+    console.log($("input[name=account]").val());
+    return false;
+  });
+
 });
