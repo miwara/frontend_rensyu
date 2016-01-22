@@ -2,7 +2,7 @@
 let $ = require("jquery"),
     jQuery = require("jquery");
 
-window.addEventListener('DOMContentLoaded', () => {
+$(document).ready(() => {
 
  $(function () {
  $("#header").css("background-color", "#eee");
