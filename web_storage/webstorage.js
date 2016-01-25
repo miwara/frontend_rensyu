@@ -1,6 +1,8 @@
 "use strict";
 window.addEventListener('DOMContentLoaded', () => {
   // localStorage のテスト
+  // 明示的な削除がない限り永続的に保持される
+  // ブラウザを閉じても消えない
   saveMethodToLocalStorage();
   readMethodToLocalStorage();
   savePropertyToLocalStorage();
@@ -9,6 +11,8 @@ window.addEventListener('DOMContentLoaded', () => {
   readHashToLocalStorage();
 
   // sessionStorage のテスト
+  // セッションが有効な間データが保持される
+  // ブラウザを閉じた時消える
   saveMethodToSessionStorage();
   readMethodToSessionStorage();
   savePropertyToSessionStorage();
