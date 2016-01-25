@@ -1,7 +1,7 @@
 "use strict";
 window.addEventListener('DOMContentLoaded', () => {
-  saveProperty();
-  readProperty();
+  saveHash();
+  readHash();
 });
 
 // メソッドで localStorage に保存する
@@ -25,4 +25,15 @@ let saveProperty = () => {
 let readProperty = () => {
   let key2 = localStorage.key2;
   alert(key2);
+};
+
+// 連想配列で localStorage に保存する
+let saveHash = () => {
+  let val3 = "val3";
+  localStorage['key3'] = val3;
+};
+
+var readHash = () => {
+  let key3 = localStorage['key3'];
+  alert(key3);
 };
