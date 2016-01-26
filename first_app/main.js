@@ -1,10 +1,10 @@
 "use strict";
-var app = require('electron').app;
-var BrowserWindow = require('electron').BrowserWindow;
+let app = require('electron').app;
+let BrowserWindow = require('electron').BrowserWindow;
 
 require('crash-reporter').start();
 
-var mainWindow = null;
+let mainWindow = null;
 
 app.on('window-all-closed', function() {
     if (process.platform != 'darwin') {
