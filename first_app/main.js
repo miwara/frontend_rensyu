@@ -1,4 +1,5 @@
-var app = require('electron').app
+"use strict";
+var app = require('electron').app;
 var BrowserWindow = require('electron').BrowserWindow;
 
 require('crash-reporter').start();
