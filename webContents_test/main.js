@@ -1,6 +1,7 @@
 "use strict";
 let app = require('electron').app;
 let BrowserWindow = require('electron').BrowserWindow;
+let ipcMain = require('electron').ipcMain;
 
 require('crash-reporter').start();
 
@@ -16,7 +17,7 @@ app.on('ready', () => {
 
   mainWindow.on('closed', () => mainWindow = null);
   webContents = mainWindow.webContents;
-
-  // 3秒後に画面が遷移する
-  setTimeout(() => webContents.loadURL('file://' + __dirname + '/index2.html'), 3000);
 });
+
+ipcMain.on('transitionWebPage',
+           () => setTimeout(() => webContents.loadURL('file://' + __dirname + '/index2.html'), 3000));
