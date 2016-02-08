@@ -5,6 +5,12 @@
     <title>React and scss test</title>
   </head>
   <body>
-    <h1>Hello World!</h1>
+    <div id="reactroot"></div>
+    <script>
+      window.addEventListener('DOMContentLoaded', () => {
+	      require('babel-register')();
+	      require("./entry.js");
+      });
+    </script>
   </body>
 </html>

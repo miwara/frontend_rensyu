@@ -11,7 +11,7 @@
     "react-dom": "^0.14.7"
   },
   "babel": {
-    "sourcemaps": "inline",
+    "sourceMaps": "inline",
     "presets": [
       "react"
     ]
