@@ -3,22 +3,17 @@
   "version": "0.1.0",
   "main": "main.js",
   "scripts": {
-    "build-js": "browserify -t [ babelify --presets [ es2015 react ] ] entry.js -o build/entry.js"
+    "build": "browserify -t [ babelify --presets [ es2015 react ] ] entry.js -o build/entry.js"
   },
   "devDependencies": {
-    "babel": "^6.5.1",
-    "babel-core": "^6.5.1",
     "babel-preset-es2015": "^6.5.0",
     "babel-preset-react": "^6.5.0",
-    "babel-register": "^6.5.1",
     "babelify": "^7.2.0",
-    "history": "^1.17.0",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-router": "^1.0.3"
   },
   "babel": {
-    "sourceMaps": "inline",
     "presets": [
       "es2015",
       "react"
