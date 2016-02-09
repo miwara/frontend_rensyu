@@ -1,9 +1,10 @@
 "use strict";
 import React, { Component } from 'react';
-import { render } from 'react-dom';
-import { Router, Route} from 'react-router';
+import { History } from 'react-router';
 
 let Holder = React.createClass ({
+  mixins: [ History ],
+
   dragover: function() {
     return false;
   },
@@ -23,6 +24,11 @@ let Holder = React.createClass ({
     return false;
   },
 
+  handleSubmit: function(e) {
+    e.preventDefault();
+    this.history.pushState(null, '/login');
+  },
+
   render: function() {
     let style = {
       padding: '100px',
@@ -30,13 +36,15 @@ let Holder = React.createClass ({
       borderStyle: 'solid'
     };
     return (
-        <div style={style} onDragover={this.dragover} onDragLeave={this.dragleave} onDragEnd={this.dragend} onDrop={this.drop}></div>
+      //        <div style={style} onDragover={this.dragover} onDragLeave={this.dragleave} onDragEnd={this.dragend} onDrop={this.drop}></div>
+        <div>
+        <h1>D&D</h1>
+        <form onSubmit={this.handleSubmit}>
+        <button type="submit">次へ</button>
+        </form>
+        </div>
     );
   }
 });
 
-render((
-    <Router>
-    <Route path="/" component={Holder} />
-    </Router>
-), document.querySelector("#app"));
+module.exports = Holder;

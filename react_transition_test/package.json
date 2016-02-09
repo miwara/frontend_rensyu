@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "main": "browserWindow.js",
   "scripts": {
-    "build": "browserify -t [ babelify --presets [ es2015 react ] ] index.js -o build/index.js",
+    "build": "browserify -t [ babelify --presets [ es2015 react ] ] main.js -o build/main.js",
     "start": "npm run build && electron ."
   },
   "devDependencies": {
