@@ -3,3 +3,4 @@ lib/
 node_modules/
 *.asar
 *.log
+build/
