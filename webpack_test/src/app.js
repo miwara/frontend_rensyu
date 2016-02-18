@@ -3,7 +3,28 @@
 import React from 'react';
 import { render } from 'react-dom';
 
+let fs = require('fs');
+
+let App = React.createClass({
+  handleSubmit: function(e) {
+    e.preventDefault();
+    console.log(fs.statSync('./src/build').isDirectory());
+    return false;
+  },
+
+  render: function () {
+    return (
+        <div>
+        <form onSubmit={this.handleSubmit}>
+        <button type="submit">submit</button>
+        </form>
+        </div>
+    );
+  }
+});
+
+
 render(
-  <h1>Hello, world!</h1>,
+  <App />,
   document.getElementById('example')
 );
