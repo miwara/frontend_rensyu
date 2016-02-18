@@ -4,6 +4,7 @@ import React from 'react';
 import { render } from 'react-dom';
 
 let fs = require('fs');
+let remote = require('electron').remote;
 
 let App = React.createClass({
   handleSubmit: function(e) {

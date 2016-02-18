@@ -17,5 +17,5 @@ module.exports = {
         }
     }]
   },
-  target: 'node'
+  target: 'atom'
 };
