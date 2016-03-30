@@ -8,6 +8,7 @@
   },
   "devDependencies": {
     "babel": "5.1.11",
-    "electron-prebuilt": "0.24.0"
+    "electron-prebuilt": "0.24.0",
+    "react": "0.13.1"
   }
 }
