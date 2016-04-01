@@ -1,10 +1,7 @@
 import React from "react";
+import TodoApp from "./components/TodoApp.react";
 
-function bootstrap() {
-  React.render(
-      <h1>Hello world!</h1>,
-      document.getElementById("todomvc-app")
-  );
-}
-
-bootstrap();
+React.render(
+  <TodoApp />,
+  document.getElementById("todomvc-app")
+);
