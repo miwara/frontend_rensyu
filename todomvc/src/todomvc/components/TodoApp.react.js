@@ -1,9 +1,25 @@
 import React from "react";
+import TodoStore from "../stores/TodoStore";
 
-const TodoApp = React.createClass({
-  render() {
-    return <h1>Hello world!</h1>;
+function getTodoState() {
+  return {
+    msg: TodoStore.getMsg()
+  };
+}
+
+class TodoApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = getTodoState();
   }
-});
+
+  render() {
+    return (
+      <div>
+        {this.state.msg}
+      </div>
+    );
+  }
+}
 
 export default TodoApp;
