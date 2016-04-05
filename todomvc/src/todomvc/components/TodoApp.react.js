@@ -1,3 +1,10 @@
+/**
+ *  view
+ *
+ *  Store から状態情報を受け取って描画処理を行う
+ *  Store のデータを表示する React Component
+ *  Action を発行する React Component
+ */
 import React from "react";
 import TodoActions from "../actions/TodoActions";
 import TodoStore from "../stores/TodoStore";

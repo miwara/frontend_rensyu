@@ -1,3 +1,11 @@
+/**
+ *  store
+ *
+ *  Dispatcher から呼び出されるコールバックを持っている
+ *  アプリケーションの状態を管理する
+ *  アプリケーションのデータとビジネスロジックを担当
+ *  store のデータはメッセージ一覧のようにデータの集合も扱う
+ */
 "use strinct";
 import appDispatcher from "../dispatcher/AppDispatcher";
 import { EventEmitter } from "events";
