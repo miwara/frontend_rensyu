@@ -5,13 +5,16 @@
  *  Store のデータを表示する React Component
  *  Action を発行する React Component
  */
+import Footer from "./Footer.react";
 import Header from "./Header.react";
+import MainSection from "./MainSection.react";
 import React from "react";
 import TodoStore from "../stores/TodoStore";
 
 function getTodoState() {
   return {
-    msg: TodoStore.getMsg()
+    allTodos: TodoStore.getAll(),
+    areAllComplete: TodoStore.areAllComplete()
   };
 }
 
@@ -21,13 +24,26 @@ class TodoApp extends React.Component {
     this.state = getTodoState();
   }
 
+  componentDidMount() {
+    TodoStore.addChangeListener(this._onChange);
+  }
+
+  componentWillUnmount() {
+    TodoStore.removeChangeListener(this._onChange);
+  }
+
   render() {
     return (
       <div>
         <Header />
-        {this.state.msg}
+        <MainSection allTodos={this.state.allTodos} areAllComplete={this.state.areAllComplete} />
+        <Footer allTodos={this.state.allTodos} />
       </div>
     );
+  }
+
+  _onChange() {
+    this.setState(getTodoState());
   }
 }
 
