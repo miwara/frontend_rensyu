@@ -4,6 +4,9 @@
  *  Store から状態情報を受け取って描画処理を行う
  *  Store のデータを表示する React Component
  *  Action を発行する React Component
+ *
+ *  onClick などのイベントによって，Action を呼び出す
+ *  Store の状態を監視し，状況に応じてsetState() メソッドを使って view を更新
  */
 import Footer from "./Footer.react";
 import Header from "./Header.react";
