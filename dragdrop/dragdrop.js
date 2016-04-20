@@ -1,7 +1,7 @@
 function onLoad() {
     var holder = document.getElementById('holder');
 
-    document.ondragover = document.ondrop = Function (e) {
+    document.ondragover = document.ondrop = function(e) {
 	e.preventDefault(); // イベントの伝搬をやめて，アプリケーションのhtmlとファイルが差し替わらないようにする
 	return false;
     };
@@ -12,12 +12,12 @@ function onLoad() {
     };
 
     /** holderエリアから外れたorドラッグが終了した */
-    holder.ondragleave = holder.ondragend = function () {
+    holder.ondragleave = holder.ondragend = function() {
 	return false;
     };
 
     /** holderエリアにドロップされた */
-    holder.ondrop = function (e) {
+    holder.ondrop = function(e) {
 	e.preventDefault();
 
 	var file = e.dataTransfer.files[0];

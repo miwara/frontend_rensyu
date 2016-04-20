@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <link rel="stylesheet" href="css/index.css">
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      document.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        return false;
+      });
+      document.addEventListener('drop', (e) => {
+        e.preventDefault();
+        return false;
+      });
+    </script>
+    <script src="build/main.js"></script>
+  </body>
+</html>

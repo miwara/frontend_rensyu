@@ -1,0 +1,8 @@
+{
+  "name": "ipc_test",
+  "version": "0.1.0",
+  "main": "main.js",
+  "devDependencies": {
+    "jquery": "^2.2.0"
+  }
+}
