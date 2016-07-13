@@ -7,7 +7,10 @@ import cx from "react/lib/cx";
 class TodoItem extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { isEditing: false};
+    this.state = { isEditing: false };
+
+    this._onToggleComplete = this._onToggleComplete.bind(this);
+    this._onDestroyClick = this._onDestroyClick.bind(this);
   }
 
   render() {

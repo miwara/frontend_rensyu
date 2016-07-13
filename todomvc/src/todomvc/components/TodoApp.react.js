@@ -25,6 +25,8 @@ class TodoApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = getTodoState();
+
+    this._onChange = this._onChange.bind(this);
   }
 
   componentDidMount() {

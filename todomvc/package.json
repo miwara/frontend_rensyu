@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node script/run.js"
   },
+  "bin": "node_modules/.bin/",
   "devDependencies": {
     "babel": "5.1.11",
     "electron-prebuilt": "0.24.0",
