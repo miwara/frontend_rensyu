@@ -1,5 +1,5 @@
 {
-  "name": "first_app",
+  "name": "test_webview",
   "version": "0.1.0",
   "main": "main.js",
   "bin": "node_modules/.bin/",
