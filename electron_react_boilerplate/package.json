@@ -1,0 +1,12 @@
+{
+  "name": "electron_react_boilerplate",
+  "version": "0.1.0",
+  "main": "main.js",
+  "bin": "node_modules/.bin/",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron-prebuilt": "^1.4.1"
+  }
+}
