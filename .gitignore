@@ -4,3 +4,4 @@ node_modules/
 *.asar
 *.log
 build/
+dist/
