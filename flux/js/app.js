@@ -2,14 +2,9 @@
 import React from 'react';
 import { render } from 'react-dom';
 
-let App = React.createClass ({
-  render: function() {
-    return (
-        <div>hello world from React</div>
-    );
-  }
-});
+let TodoApp = require('./components/TodoApp.react');
 
-render((
-    <App />
-), document.getElementById('app'));
+render(
+  <TodoApp />,
+  document.getElementById('todoapp')
+);
