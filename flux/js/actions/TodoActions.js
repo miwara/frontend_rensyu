@@ -30,6 +30,12 @@ let TodoActions = {
 
   destroy: function(id) {
     AppDispatcher.dispatch({
+      actionType: TodoConstants.TODO_DESTROY
+    });
+  },
+
+  destroyCompleted: function() {
+    AppDispatcher.dispatch({
       actionType: TodoConstants.TODO_DESTROY_COMPLETED
     });
   }
