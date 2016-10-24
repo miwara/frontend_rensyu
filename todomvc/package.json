@@ -1,0 +1,18 @@
+{
+  "name": "syakyo-todomvc",
+  "version": "1.0.0",
+  "private": true,
+  "main": "./src/main.js",
+  "scripts": {
+    "start": "node script/run.js"
+  },
+  "bin": "node_modules/.bin/",
+  "devDependencies": {
+    "babel": "5.1.11",
+    "electron-prebuilt": "0.24.0",
+    "flux": "2.0.1",
+    "keymirror": "0.1.1",
+    "object-assign": "2.0.0",
+    "react": "0.13.1"
+  }
+}
