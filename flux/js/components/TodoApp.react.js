@@ -4,6 +4,7 @@ import { render } from 'react-dom';
 
 let TodoStore = require('../stores/TodoStore');
 
+let Header = require('./Header.react');
 let MainSection = require('./MainSection.react');
 
 function getTodoState() {
@@ -25,7 +26,7 @@ let TodoApp = React.createClass ({
   render: function() {
     return (
       <div>
-        hello world from React
+        <Header />
         <MainSection
           allTodos={this.state.allTodos}
           areAllComplete={this.state.areAllComplete}
