@@ -38,7 +38,8 @@ let TodoActions = {
 
   destroy: function(id) {
     AppDispatcher.dispatch({
-      actionType: TodoConstants.TODO_DESTROY
+      actionType: TodoConstants.TODO_DESTROY,
+      id: id
     });
   },
 
