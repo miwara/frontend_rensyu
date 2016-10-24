@@ -3,6 +3,13 @@ let AppDispatcher = require('../dispatcher/AppDispatcher');
 let TodoConstants = require('../constants/TodoConstants');
 
 let TodoActions = {
+  create: function(text) {
+    AppDispatcher.dispatch({
+      actionType: TodoConstants.TODO_CREATE,
+      text: text
+    });
+  },
+
   toggleComplete: function(todo) {
     let id = todo.id;
     let actionType = todo.complete ?

@@ -19,10 +19,12 @@ let TodoTextInput = React.createClass({
   },
 
   _save: function(event) {
-    this.props.onSave(this.sate.value);
-    this.setState({
-      value: event.target.value
-    });
+    this.props.onSave(this.state.value);
+    this.setState({value: ''});
+  },
+
+  _onChange: function(event) {
+    this.setState({value: event.target.value});
   },
 
   _onKeyDown: function(event) {
