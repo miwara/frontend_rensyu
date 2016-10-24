@@ -3,6 +3,7 @@ import React from 'react';
 import classNames from 'classNames';
 
 let TodoActions = require('../actions/TodoActions');
+let TodoTextInput = require('./TodoTextInput.react');
 
 let TodoItem = React.createClass({
   propTypes: {
@@ -21,6 +22,15 @@ let TodoItem = React.createClass({
 
   _onDoubleClick: function() {
     this.setState({isEditing: true});
+  },
+
+  _onSave: function(text) {
+    TodoActions.updateText(this.props.todo.id, text);
+    this.setState({isEditing: false});
+  },
+
+  _onDestroyClick: function() {
+    TodoActions.destroy(this.props.todo.id);
   },
 
   render: function() {

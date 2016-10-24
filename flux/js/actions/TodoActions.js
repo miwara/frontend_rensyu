@@ -19,6 +19,12 @@ let TodoActions = {
     AppDispatcher.dispatch({
       actionType: TodoConstants.TODO_TOGGLE_COMPLETE_ALL
     });
+  },
+
+  destroy: function(id) {
+    AppDispatcher.dispatch({
+      actionType: TodoConstants.TODO_DESTROY_COMPLETED
+    });
   }
 };
 
