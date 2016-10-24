@@ -1,7 +1,8 @@
 'use strict';
 import React from 'react';
-
 import classNames from 'classNames';
+
+let TodoActions = require('../actions/TodoActions');
 
 let TodoItem = React.createClass({
   propTypes: {
@@ -15,7 +16,7 @@ let TodoItem = React.createClass({
   },
 
   _onToggleComplete: function() {
-
+    TodoActions.toggleComplete(this.props.todo);
   },
 
   _onDoubleClick: function() {

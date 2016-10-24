@@ -2,6 +2,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 
+let TodoActions = require('../actions/TodoActions');
 let TodoItem = require('./TodoItem.react');
 
 let MainSection = React.createClass({
@@ -11,6 +12,7 @@ let MainSection = React.createClass({
   },
 
   _onToggleCompleteAll: function() {
+    TodoActions.toggleCompleteAll();
   },
 
   render: function() {
