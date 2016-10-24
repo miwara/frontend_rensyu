@@ -18,6 +18,10 @@ let TodoApp = React.createClass ({
     return getTodoState();
   },
 
+  _onChange: function() {
+    this.setSate(getTodoState());
+  },
+
   render: function() {
     return (
       <div>
