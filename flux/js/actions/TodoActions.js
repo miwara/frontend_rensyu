@@ -10,6 +10,14 @@ let TodoActions = {
     });
   },
 
+  updateText: function(id, text) {
+    AppDispatcher.dispatch({
+      actionType: TodoConstants.TODO_UPDATE_TEXT,
+      id: id,
+      text: text
+    });
+  },
+
   toggleComplete: function(todo) {
     let id = todo.id;
     let actionType = todo.complete ?

@@ -37,7 +37,6 @@ let TodoItem = React.createClass({
     let todo = this.props.todo;
 
     let input;
-
     if (this.state.isEditing) {
       input =
         <TodoTextInput
@@ -51,7 +50,7 @@ let TodoItem = React.createClass({
      <li
        className={classNames({
          'completed': todo.complete,
-         'edition': this.state.isEditing
+         'editing': this.state.isEditing
        })}
        key={todo.id}>
        <div className="view">
