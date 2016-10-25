@@ -3,37 +3,35 @@ import React from 'react';
 import classNames from 'classNames';
 
 let TodoActions = require('../actions/TodoActions');
-let TodoTextInput = require('./TodoTextInput.react');
 
-let TodoItem = React.createClass({
-  propTypes: {
-    todo: React.PropTypes.object.isRequired
-  },
+import TodoTextInput from './TodoTextInput.react';
 
-  getInitialState: function() {
-    return {
+class TodoItem extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
       isEditing: false
     };
-  },
+  }
 
-  _onToggleComplete: function() {
+  _onToggleComplete() {
     TodoActions.toggleComplete(this.props.todo);
-  },
+  }
 
-  _onDoubleClick: function() {
+  _onDoubleClick() {
     this.setState({isEditing: true});
-  },
+  }
 
-  _onSave: function(text) {
+  _onSave(text) {
     TodoActions.updateText(this.props.todo.id, text);
     this.setState({isEditing: false});
-  },
+  }
 
-  _onDestroyClick: function() {
+  _onDestroyClick() {
     TodoActions.destroy(this.props.todo.id);
-  },
+  }
 
-  render: function() {
+  render() {
     let todo = this.props.todo;
 
     let input;
@@ -41,7 +39,7 @@ let TodoItem = React.createClass({
       input =
         <TodoTextInput
           className="edit"
-          onSave={this._onSave}
+          onSave={this._onSave.bind(this)}
           value={todo.text}
         />;
     }
@@ -58,15 +56,21 @@ let TodoItem = React.createClass({
            className="toggle"
            type="checkbox"
            checked={todo.complete}
-           onChange={this._onToggleComplete}
+           onChange={this._onToggleComplete.bind(this)}
          />
-         <label onDoubleClick={this._onDoubleClick}>{todo.text}</label>
-         <button className="destroy" onClick={this._onDestroyClick} />
+         <label onDoubleClick={this._onDoubleClick.bind(this)}>{todo.text}</label>
+         <button className="destroy" onClick={this._onDestroyClick.bind(this)} />
        </div>
        {input}
      </li>
     );
   }
-});
+}
 
-module.exports = TodoItem;
+TodoItem.propTypes = {
+  todo: React.PropTypes.object.isRequired
+};
+
+
+
+export default TodoItem;

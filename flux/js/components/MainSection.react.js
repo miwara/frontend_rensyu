@@ -3,19 +3,15 @@ import React from 'react';
 import { render } from 'react-dom';
 
 let TodoActions = require('../actions/TodoActions');
-let TodoItem = require('./TodoItem.react');
 
-let MainSection = React.createClass({
-  propTypes: {
-    allTodos: React.PropTypes.object.isRequired,
-    areAllComplete: React.PropTypes.bool.isRequired
-  },
+import TodoItem from './TodoItem.react';
 
-  _onToggleCompleteAll: function() {
+class MainSection extends React.Component {
+  _onToggleCompleteAll() {
     TodoActions.toggleCompleteAll();
-  },
+  }
 
-  render: function() {
+  render() {
     if (Object.keys(this.props.allTodos).length < 1) {
       return null;
     }
@@ -32,7 +28,7 @@ let MainSection = React.createClass({
        <input
          id="toggle-all"
          type="checkbox"
-         onChange={this._onToggleCompleteAll}
+         onChange={this._onToggleCompleteAll.bind(this)}
          checked={this.props.areAllComplete ? 'checked' : ''}
        />
        <label htmlFor="toggle-all">Mark all as complete</label>
@@ -40,6 +36,11 @@ let MainSection = React.createClass({
       </section>
     );
   }
-});
+}
 
-module.exports = MainSection;
+MainSection.propTypes = {
+  allTodos: React.PropTypes.object.isRequired,
+  areAllComplete: React.PropTypes.bool.isRequired
+};
+
+export default MainSection;

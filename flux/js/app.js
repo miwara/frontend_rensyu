@@ -2,7 +2,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 
-let TodoApp = require('./components/TodoApp.react');
+import TodoApp from './components/TodoApp.react';
 
 render(
   <TodoApp />,

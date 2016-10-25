@@ -3,16 +3,12 @@ import React from 'react';
 
 let TodoActions = require('../actions/TodoActions');
 
-let Footer = React.createClass({
-  propTypes: {
-    allTodos: React.PropTypes.object.isRequired
-  },
-
-  _onClearCompletedClick: function() {
+class Footer extends React.Component {
+  _onClearCompletedClick() {
     TodoActions.destroyCompleted();
-  },
+  }
 
-  render: function() {
+  render() {
     let allTodos = this.props.allTodos;
     let total = Object.keys(allTodos).length;
 
@@ -36,7 +32,7 @@ let Footer = React.createClass({
       clearCompletedButton =
         <button
           id="clear-completed"
-          onClick={this._onClearCompletedClick}>
+          onClick={this._onClearCompletedClick.bind(this)}>
           Clear completed ({completed})
         </button>;
     }
@@ -52,6 +48,10 @@ let Footer = React.createClass({
     </footer>
     );
   }
-});
+}
 
-module.exports = Footer;
+Footer.propTypes = {
+  allTodos: React.PropTypes.object.isRequired
+};
+
+export default Footer;

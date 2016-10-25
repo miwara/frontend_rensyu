@@ -4,35 +4,37 @@ import { render } from 'react-dom';
 
 let TodoStore = require('../stores/TodoStore');
 
-let Header = require('./Header.react');
-let MainSection = require('./MainSection.react');
-let Footer = require('./Footer.react');
+import Header from './Header.react';
+import MainSection from './MainSection.react';
+import Footer from './Footer.react';
 
-function getTodoState() {
-  return {
-    allTodos: TodoStore.getAll(),
-    areAllComplete: TodoStore.areAllComplete()
-  };
-}
+class TodoApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      allTodos: TodoStore.getAll(),
+      areAllComplete: TodoStore.areAllComplete()
+    };
 
-let TodoApp = React.createClass ({
-  getInitialState: function() {
-    return getTodoState();
-  },
+    this._onChange = this._onChange.bind(this);
+  }
 
-  componentDidMount: function() {
+  componentDidMount() {
     TodoStore.addChangeListener(this._onChange);
-  },
+  }
 
-  componentWillUnmount: function() {
+  componentWillUnmount() {
     TodoStore.removeChnageListener(this._onChange);
-  },
+  }
 
-  _onChange: function() {
-    this.setState(getTodoState());
-  },
+  _onChange() {
+    this.setState({
+      allTodos: TodoStore.getAll(),
+      areAllComplete: TodoStore.areAllComplete()
+    });
+  }
 
-  render: function() {
+  render() {
     return (
       <div>
         <Header />
@@ -44,6 +46,6 @@ let TodoApp = React.createClass ({
       </div>
     );
   }
-});
+}
 
-module.exports = TodoApp;
+export default TodoApp;
