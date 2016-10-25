@@ -1,7 +1,7 @@
 'use strict';
 import React from 'react';
 
-let TodoActions = require('../actions/TodoActions');
+import TodoActions from '../actions/TodoActions';
 
 class Footer extends React.Component {
   _onClearCompletedClick() {

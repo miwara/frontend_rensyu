@@ -2,7 +2,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 
-let TodoActions = require('../actions/TodoActions');
+import TodoActions from '../actions/TodoActions';
 
 import TodoItem from './TodoItem.react';
 

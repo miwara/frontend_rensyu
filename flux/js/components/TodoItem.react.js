@@ -2,7 +2,7 @@
 import React from 'react';
 import classNames from 'classNames';
 
-let TodoActions = require('../actions/TodoActions');
+import TodoActions from '../actions/TodoActions';
 
 import TodoTextInput from './TodoTextInput.react';
 
