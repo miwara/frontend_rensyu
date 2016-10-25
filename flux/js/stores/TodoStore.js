@@ -1,6 +1,6 @@
 'use strict';
-let EventEmitter = require('events').EventEmitter;
-let assign = require('object-assign');
+import { EventEmitter } from 'events';
+import assign from 'object-assign';
 
 import AppDispatcher from '../dispatcher/AppDispatcher';
 import TodoConstants from '../constants/TodoConstants';
@@ -40,34 +40,38 @@ function destroyCompleted(){
   }
 }
 
-let TodoStore = assign({}, EventEmitter.prototype, {
-  areAllComplete: function() {
+class TodoStore extends EventEmitter {
+  constructor() {
+    super();
+    AppDispatcher.register(this.handler.bind(this));
+  }
+
+  areAllComplete() {
     for (let id in _todos) {
       if (!_todos[id].complete) {
         return false;
       }
     }
     return true;
-  },
+  }
 
-  getAll: function() {
+  getAll() {
     return _todos;
-  },
+  }
 
-  emitChange: function() {
+  emitChange() {
     this.emit(CHANGE_EVENT);
-  },
+  }
 
-  addChangeListener: function(callback) {
+  addChangeListener(callback) {
     this.on(CHANGE_EVENT, callback);
-  },
+  }
 
-  removeChangeListener: function(callback) {
+  removeChangeListener(callback) {
     this.removeListener(CHANGE_EVENT, callback);
   }
-});
 
-AppDispatcher.register(function(action) {
+handler(action) {
   let text;
 
   switch(action.actionType) {
@@ -75,51 +79,52 @@ AppDispatcher.register(function(action) {
     text = action.text.trim();
     if (text !== '') {
       create(text);
-      TodoStore.emitChange();
+      this.emitChange();
     }
     break;
 
   case TodoConstants.TODO_TOGGLE_COMPLETE_ALL:
-    if (TodoStore.areAllComplete()) {
+    if (this.areAllComplete()) {
       updateAll({complete: false});
     } else {
       updateAll({complete: true});
     }
-    TodoStore.emitChange();
+    this.emitChange();
     break;
 
   case TodoConstants.TODO_UNDO_COMPLETE:
     update(action.id, {complete: false});
-    TodoStore.emitChange();
+    this.emitChange();
     break;
 
   case TodoConstants.TODO_COMPLETE:
     update(action.id, {complete: true});
-    TodoStore.emitChange();
+    this.emitChange();
     break;
 
   case TodoConstants.TODO_UPDATE_TEXT:
     text = action.text.trim();
     if (text !== '') {
       update(action.id, {text: text});
-      TodoStore.emitChange();
+      this.emitChange();
     }
     break;
 
   case TodoConstants.TODO_DESTROY:
     destroy(action.id);
-    TodoStore.emitChange();
+    this.emitChange();
     break;
 
   case TodoConstants.TODO_DESTROY_COMPLETED:
     destroyCompleted();
-    TodoStore.emitChange();
+    this.emitChange();
     break;
 
   default:
     // no op
     break;
   }
-});
+}
+}
 
-module.exports = TodoStore;
+export default new TodoStore;

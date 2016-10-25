@@ -2,7 +2,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 
-let TodoStore = require('../stores/TodoStore');
+import TodoStore from '../stores/TodoStore';
 
 import Header from './Header.react';
 import MainSection from './MainSection.react';
