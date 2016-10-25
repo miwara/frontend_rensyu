@@ -71,60 +71,60 @@ class TodoStore extends EventEmitter {
     this.removeListener(CHANGE_EVENT, callback);
   }
 
-handler(action) {
-  let text;
+  handler(action) {
+    let text;
 
-  switch(action.actionType) {
-  case TodoConstants.TODO_CREATE:
-    text = action.text.trim();
-    if (text !== '') {
-      create(text);
+    switch(action.actionType) {
+    case TodoConstants.TODO_CREATE:
+      text = action.text.trim();
+      if (text !== '') {
+        create(text);
+        this.emitChange();
+      }
+      break;
+
+    case TodoConstants.TODO_TOGGLE_COMPLETE_ALL:
+      if (this.areAllComplete()) {
+        updateAll({complete: false});
+      } else {
+        updateAll({complete: true});
+      }
       this.emitChange();
-    }
-    break;
+      break;
 
-  case TodoConstants.TODO_TOGGLE_COMPLETE_ALL:
-    if (this.areAllComplete()) {
-      updateAll({complete: false});
-    } else {
-      updateAll({complete: true});
-    }
-    this.emitChange();
-    break;
-
-  case TodoConstants.TODO_UNDO_COMPLETE:
-    update(action.id, {complete: false});
-    this.emitChange();
-    break;
-
-  case TodoConstants.TODO_COMPLETE:
-    update(action.id, {complete: true});
-    this.emitChange();
-    break;
-
-  case TodoConstants.TODO_UPDATE_TEXT:
-    text = action.text.trim();
-    if (text !== '') {
-      update(action.id, {text: text});
+    case TodoConstants.TODO_UNDO_COMPLETE:
+      update(action.id, {complete: false});
       this.emitChange();
+      break;
+
+    case TodoConstants.TODO_COMPLETE:
+      update(action.id, {complete: true});
+      this.emitChange();
+      break;
+
+    case TodoConstants.TODO_UPDATE_TEXT:
+      text = action.text.trim();
+      if (text !== '') {
+        update(action.id, {text: text});
+        this.emitChange();
+      }
+      break;
+
+    case TodoConstants.TODO_DESTROY:
+      destroy(action.id);
+      this.emitChange();
+      break;
+
+    case TodoConstants.TODO_DESTROY_COMPLETED:
+      destroyCompleted();
+      this.emitChange();
+      break;
+
+    default:
+      // no op
+      break;
     }
-    break;
-
-  case TodoConstants.TODO_DESTROY:
-    destroy(action.id);
-    this.emitChange();
-    break;
-
-  case TodoConstants.TODO_DESTROY_COMPLETED:
-    destroyCompleted();
-    this.emitChange();
-    break;
-
-  default:
-    // no op
-    break;
   }
-}
 }
 
 export default new TodoStore;
