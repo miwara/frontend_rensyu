@@ -1,6 +1,6 @@
 'use strict';
-let AppDispatcher = require('../dispatcher/AppDispatcher');
-let TodoConstants = require('../constants/TodoConstants');
+import AppDispatcher from '../dispatcher/AppDispatcher';
+import TodoConstants from '../constants/TodoConstants';
 
 export default {
   create: (text) => {

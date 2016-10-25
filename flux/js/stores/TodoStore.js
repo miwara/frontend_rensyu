@@ -1,8 +1,9 @@
 'use strict';
-let AppDispatcher = require('../dispatcher/AppDispatcher');
 let EventEmitter = require('events').EventEmitter;
-let TodoConstants = require('../constants/TodoConstants');
 let assign = require('object-assign');
+
+import AppDispatcher from '../dispatcher/AppDispatcher';
+import TodoConstants from '../constants/TodoConstants';
 
 let CHANGE_EVENT = 'change';
 
