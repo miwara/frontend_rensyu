@@ -3,6 +3,32 @@
   <head></head>
   <body>
     <h1>BiquadFilter</h1>
+    <div style="fload:left">
+      <table>
+	<tr><td>Type:</td><td>
+	  <select name="type" onchange="Setup()">
+	    <option>LPF</option>
+	    <option>HPF</option>
+	    <option>BPF</option>
+	    <option>LowShelf</option>
+	    <option>HighShelf</option>
+	    <option>Peaking</option>
+	    <option>Notch</option>
+	  </select></td></tr>
+	<tr><td>Freq: </td><td>
+	  <input type="range" min="100" max="20000" name="freq" size="10" onchange="Setup()" value="5000">
+	</td><td><div name="freqlabel">5000</div></td></tr>
+	<tr><td>Q: </td><td>
+	  <input type="range" min="0" max="50" step="0.1" name="q" size="10" onchange="Setup()" value="5">
+	</td><td><div name="qlabel">5</div></td></tr>
+	<tr><td>Gain: </td><td>
+	  <input type="range" min="-50" max="50" name="gain" size="10" onchange="Setup()" value="0">
+	</td><td><div name="gainlabel">0</div></td></tr>
+      </table>
+      <p><button onclick="Play()">Play</button></p>
+      <br>
+      <p><canbas name="cvs" width=512 height=256></canvas></p>
+    </div>
     <script test="text/javascript">
     </script>
   </body>
