@@ -5,7 +5,7 @@
     <h1>Oscillator</h1>
     <table>
       <tr><td>Type</td><td>
-	<select id="type" onchange="Setup()">
+	<select name="type" onchange="Setup()">
 	  <option value="sine">Sine</option>
 	  <option value="square">Square</option>
 	  <option value="sawtooth">Sawtooth</option>
@@ -13,14 +13,53 @@
 	</select></td></tr>
       <tr><td>Freq</td><td>
 	<!-- <input type="number" min="50" max="5000" id="freq" placehoder="440" value="440" onchange="Setup()">Hz -->
-	<input type="range" min="50" max="5000" id="freq" value="440" onchange="Setup()">
+	<input type="range" min="50" max="5000" name="freq" value="440" onchange="Setup()">
       </td></tr>
-      <tr><td>Level</td><td><input type="range" min="0" max="1" step="0.01" size="10" id="level" value="1" onchange="Setup()"></td></tr>
+      <tr><td>Level</td><td><input type="range" min="0" max="1" step="0.01" size="10" name="level" value="1" onchange="Volume()"></td></tr>
     </table>
     <br>
-    <button>Start</button>
-    <button>Stop</button><br>
-    <script type="text/jacascript">
+    <button onclick="Play()">Play</button>
+    <button onclick="Stop()">Stop</button><br>
+    <script type="text/javascript">
+     window.AudioContext = window.AudioContext;
+     let audioctx = new AudioContext();
+
+     let play = 1;
+     let osc = audioctx.createOscillator();
+     let gain = audioctx.createGain();
+
+     osc.connect(gain);
+     gain.connect(audioctx.destination);
+
+     let level = 0;
+
+     let Setup = () => {
+	 let type = document.getElementsByName("type")[0].value;
+	 let freq = parseFloat(document.getElementsByName("freq")[0].value);
+
+	 osc.type = type;
+	 osc.frequency.value = freq;
+	 gain.gain.value = level;
+
+	 if (play) {
+	     osc.start();
+	     play = 0;
+	 }
+     }
+
+     let Play = () => {
+	 Setup();
+	 Volume();
+     }
+
+     let Stop = () => {
+	 gain.gain.value = 0;
+     }
+
+     let Volume = () => {
+	 level = parseFloat(document.getElementsByName("level")[0].value);
+	 gain.gain.value = level;
+     }
     </script>
   </body>
 </html>
