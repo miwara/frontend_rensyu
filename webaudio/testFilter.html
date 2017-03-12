@@ -7,13 +7,14 @@
       <table>
 	<tr><td>Type:</td><td>
 	  <select name="type" onchange="Setup()">
-	    <option>LPF</option>
-	    <option>HPF</option>
-	    <option>BPF</option>
-	    <option>LowShelf</option>
-	    <option>HighShelf</option>
-	    <option>Peaking</option>
-	    <option>Notch</option>
+	    <option value="lowpass">LPF</option>
+	    <option value="highpass">HPF</option>
+	    <option value="bandpass">BPF</option>
+	    <option value="lowshelf">LowShelf</option>
+	    <option value="highshelf">HighShelf</option>
+	    <option value="peaking">Peaking</option>
+	    <option value="notch">Notch</option>
+	    <option value="allpass">AllPass</option>
 	  </select></td></tr>
 	<tr><td>Freq: </td><td>
 	  <input type="range" min="100" max="20000" name="freq" size="10" onchange="Setup()" value="5000">
@@ -27,9 +28,90 @@
       </table>
       <p><button onclick="Play()">Play</button></p>
       <br>
-      <p><canbas name="cvs" width=512 height=256></canvas></p>
+      <p><canvas id="cvs" width=512 height=256></canvas></p>
     </div>
     <script test="text/javascript">
+     window.AudioContext = window.AudioContext;
+     let audioctx = new AudioContext();
+
+     let bufsize = 1024;
+     let play = 0;
+     let data = new Float32Array(bufsize);
+
+     let filter = audioctx.createBiquadFilter();
+     let osc = null;
+
+     let srcproc = audioctx.createScriptProcessor(bufsize);
+     srcproc.onaudioprocess = (ev) => {
+	 let buf0 = ev.outputBuffer.getChannelData(0);
+	 let buf1 = ev.outputBuffer.getChannelData(1);
+	 for (let i = 0; i < bufsize; ++ i) {
+	     buf0[i] = buf1[i] = (Math.random() - 0.5) * play;
+	 }
+     };
+     srcproc.connect(filter);
+
+     filter.connect(audioctx.destination);
+     filter.frequency.value = 5000;
+     filter.Q.value = 5;
+
+     let Setup = () => {
+	 filter.type = document.getElementsByName("type")[0].value;
+	 filter.frequency.value = document.getElementsByName("freqlabel")[0].innerHTML = parseFloat(document.getElementsByName("freq")[0].value);
+	 filter.Q.value = document.getElementsByName("qlabel")[0].innerHTML = parseFloat(document.getElementsByName("q")[0].value);
+	 filter.gain.value = document.getElementsByName("gainlabel")[0].innerHTML = parseFloat(document.getElementsByName("gain")[0].value);
+     }
+
+     let Play = () => {
+	 if (play) {
+	     play = 0;
+	 } else {
+	     if (osc == null) {
+		 osc = audioctx.createOscillator();
+		 osc.start();
+	     }
+	     play = 1;
+	 }
+     }
+
+     Setup();
+
+     /* グラフ描画 */
+     let analyzer = audioctx.createAnalyser();
+     filter.connect(analyzer);
+     setInterval(DrowGraph, 100);
+
+     function DrowGraph() {
+	 Analyze();
+	 let cv = document.getElementById("cvs");
+	 let ctx = cv.getContext("2d");
+	 ctx.fillStyle = "#000000";
+	 ctx.fillRect(0, 0, 512, 256);
+	 ctx.fillStyle = "#009900";
+	 for (let i = 0; i < 512; ++i) {
+	     let f = audioctx.sampleRate * i / 1024;
+	     y = 128 + (data[i] + 48.16) * 2.56;
+	     ctx.fillRect(i, 256 - y, 1, y);
+	 }
+	 ctx.fillStyle = "#ff8844";
+	 for (let d = -50; d < 50; d += 10) {
+	     let y = 128 - (d * 256 / 100) | 0;
+	     ctx.fillRect(20, y, 512, 1);
+	     ctx.fillText(d + "dB", 5, y);
+	 }
+	 ctx.fillRect(20, 128, 512, 1);
+	 for (let f = 2000; f < audioctx.sampleRate / 2; f += 2000) {
+	     var x = (f * 1024 / audioctx.sampleRate) | 0;
+	     ctx.fillRect(x, 0, 1, 245);
+	     ctx.fillText(f + "Hz", x - 10, 255);
+	 }
+     }
+
+     let Analyze = () => {
+	 analyzer.smoothingTimeConstant = 0.7;
+	 analyzer.fftSize = 1024;
+	 analyzer.getFloatFrequencyData(data);
+     }
     </script>
   </body>
 </html>
