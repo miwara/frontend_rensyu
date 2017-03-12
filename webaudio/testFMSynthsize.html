@@ -6,9 +6,34 @@
     OP1 Freq: <input type="text" size="10" name="op1freq" value="220"><br>
     OP1 Level: <input type="text" size="10" name="op1level" value="300"><br>
     OP2 Freq: <input type="text" size="10" name="op2freq" value="440"><br>
-    OP2 Level: <input type="text" size="10" name="oplevel" value="1"><br>
+    OP2 Level: <input type="text" size="10" name="op2level" value="1"><br>
     <button onclick="Setup()">Set</button><br>
     <script type="text/javascript">
+     window.AudioContext = window.AudioContext;
+     let audioctx = new AudioContext();
+
+     let play = 1;
+     let op1 = audioctx.createOscillator();
+     let gain1 = audioctx.createGain();
+     let op2 = audioctx.createOscillator();
+     let gain2 = audioctx.createGain();
+
+     op1.connect(gain1);
+     gain1.connect(op2.frequency);
+     op2.connect(gain2);
+     gain2.connect(audioctx.destination);
+
+     let Setup = () => {
+	 if(play) {
+	     play = 0;
+	     op1.start();
+	     op2.start();
+	 }
+	 op1.frequency.value = parseFloat(document.getElementsByName("op1freq")[0].value);
+	 gain1.gain.value = parseFloat(document.getElementsByName("op1level")[0].value);
+	 op2.frequency.value = parseFloat(document.getElementsByName("op2freq")[0].value);
+	 gain2.gain.value = parseFloat(document.getElementsByName("op2level")[0].value);
+     }
     </script>
   </body>
 </html>
