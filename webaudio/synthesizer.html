@@ -32,6 +32,8 @@
 	</select></td></tr>
       <tr><td>Freq</td><td>
 	<input type="range" min="50.0" max="20000.0" step="0.1" name="ffreq" value="0.0" size="10" onchange="setup()"></td><td><div name="ffreqlabel">50.0</div></td></tr>
+      <tr><td>Q</td><td>
+      <input type="range" min="0.0" max="50.0" step="0.1" name="q" value="5.0" size="10" onchange="setup()"></td><td><div name="qlabel">5.0</div</td></tr>
     </table>
 
     <h2>Amplitude</h2>
@@ -70,6 +72,7 @@
        let freq = document.getElementsByName("freqlabel")[0].innerHTML = parseFloat(document.getElementsByName("freq")[0].value);
        let filterType = document.getElementsByName("type")[0].value;
        let ffreq = document.getElementsByName("ffreqlabel")[0].innerHTML = parseFloat(document.getElementsByName("ffreq")[0].value);
+       let q = document.getElementsByName("qlabel")[0].innerHTML = parseFloat(document.getElementsByName("q")[0].value);
        let level = document.getElementsByName("levellabel")[0].innerHTML = parseFloat(document.getElementsByName("level")[0].value);
        let attack = document.getElementsByName("attacklabel")[0].innerHTML = parseFloat(document.getElementsByName("attack")[0].value);
        let decay = document.getElementsByName("decaylabel")[0].innerHTML = parseFloat(document.getElementsByName("decay")[0].value);
