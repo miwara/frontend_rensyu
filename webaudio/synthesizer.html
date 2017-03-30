@@ -79,9 +79,13 @@
        let sustain = document.getElementsByName("sustainlabel")[0].innerHTML = parseFloat(document.getElementsByName("sustain")[0].value);
        let release = document.getElementsByName("releaselabel")[0].innerHTML = parseFloat(document.getElementsByName("release")[0].value);
 
-
        osc.type = waveType;
        osc.frequency.value = freq;
+
+       filter.type = filterType;
+       filter.frequency = ffreq;
+       filter.Q.value = q;
+
        amp.gain.value = level;
    }
 
