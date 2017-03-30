@@ -50,27 +50,45 @@
 
     <br>
     <button onclick="keyOn()">KeyOn</button>
-    <button oncluck="keyOff()">KeyOff</button>
+    <button onclick="keyOff()">KeyOff</button>
   </body>
 
   <script type="text/javascript">
+   window.AudioContext = window.AudioContext;
+   let audioctx = new AudioContext();
+
+   let osc = audioctx.createOscillator();
+   let filter = audioctx.createBiquadFilter();
+   let amp = audioctx.createGain();
+
+   osc.connect(filter);
+   filter.connect(amp);
+   amp.connect(audioctx.destination);
+
    let setup = () => {
-       document.getElementsByName("freqlabel")[0].innerHTML = parseFloat(document.getElementsByName("freq")[0].value);
-       document.getElementsByName("ffreqlabel")[0].innerHTML = parseFloat(document.getElementsByName("ffreq")[0].value);
-       document.getElementsByName("levellabel")[0].innerHTML = parseFloat(document.getElementsByName("level")[0].value);
-       document.getElementsByName("attacklabel")[0].innerHTML = parseFloat(document.getElementsByName("attack")[0].value);
-       document.getElementsByName("decaylabel")[0].innerHTML = parseFloat(document.getElementsByName("decay")[0].value);
-       document.getElementsByName("sustainlabel")[0].innerHTML = parseFloat(document.getElementsByName("sustain")[0].value);
-       document.getElementsByName("releaselabel")[0].innerHTML = parseFloat(document.getElementsByName("release")[0].value);
+       let waveType = document.getElementsByName("wave")[0].value;
+       let freq = document.getElementsByName("freqlabel")[0].innerHTML = parseFloat(document.getElementsByName("freq")[0].value);
+       let filterType = document.getElementsByName("type")[0].value;
+       let ffreq = document.getElementsByName("ffreqlabel")[0].innerHTML = parseFloat(document.getElementsByName("ffreq")[0].value);
+       let level = document.getElementsByName("levellabel")[0].innerHTML = parseFloat(document.getElementsByName("level")[0].value);
+       let attack = document.getElementsByName("attacklabel")[0].innerHTML = parseFloat(document.getElementsByName("attack")[0].value);
+       let decay = document.getElementsByName("decaylabel")[0].innerHTML = parseFloat(document.getElementsByName("decay")[0].value);
+       let sustain = document.getElementsByName("sustainlabel")[0].innerHTML = parseFloat(document.getElementsByName("sustain")[0].value);
+       let release = document.getElementsByName("releaselabel")[0].innerHTML = parseFloat(document.getElementsByName("release")[0].value);
+
+
+       osc.type = waveType;
+       osc.frequency.value = freq;
+       amp.gain.value = level;
    }
 
    let keyOn = () => {
        setup();
+       osc.start();
    }
 
    let keyOff = () => {
+       osc.stop();
    }
-
-
   </script>
 </html>
