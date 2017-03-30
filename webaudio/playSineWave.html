@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head></head>
+  <body>
+    <h1>play sine wave</h1>
+    <button onclick="Play()"> Play </button>
+    <button onclick="Stop()"> Stop </button><br>
+    <script type="text/javascript">
+     window.AudioContext = window.webkitAudioContext||window.AudioContext;
+     let audioctx = new AudioContext();
+
+     let osc = audioctx.createOscillator();
+     osc.connect(audioctx.destination);
+
+     let Play = () => {
+       osc.start();
+     }
+
+     let Stop = () => {
+     /* 一度止めると二度と再生できなくなる(web audioの仕様) */
+      osc.stop();
+     }
+    </script>
+  </body>
+</html>
