@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head></head>
+  <body>
+    <h1>Synthesizer</h1>
+
+    <h2>Oscillator</h2>
+    <table>
+      <tr><td>Wave</td><td>
+	<select name="wave" onChange="setup()">
+	  <option value="sine">Sine</option>
+	  <option value="square">Square</option>
+	  <option value="sawtooth">Sawtooth</option>
+	  <option value="triangle">Triangle</option>
+	</select></td></tr>
+      <tr><td>Freq</td><td>
+	<input type="range" min="50.0" max="20000.0" step="0.1" name="freq" value="440.0" size="10" onchange="setup()"></td><td><div name="freqlabel">440.0</div></td></tr>
+    </table>
+
+    <h2>Filter</h2>
+    <table>
+      <tr><td>Type</td><td>
+	<select name="type" onchange="setup()">
+	  <option value="allpass">AllPass</option>
+	  <option value="lowpass">LPF</option>
+	  <option value="highpass">HPF</option>
+	  <option value="bandpass">BPF</option>
+	  <option value="lowshelf">LowShelf</option>
+	  <option value="highshelf">HighShelf</option>
+	  <option value="peaking">Peaking</option>
+	  <option value="notch">Notch</option>
+	</select></td></tr>
+      <tr><td>Freq</td><td>
+	<input type="range" min="50.0" max="20000.0" step="0.1" name="ffreq" value="0.0" size="10" onchange="setup()"></td><td><div name="ffreqlabel">50.0</div></td></tr>
+    </table>
+
+    <h2>Amplitude</h2>
+    <table>
+      <tr><td>Level</td><td>
+	<input type="range" min="0.0" max="1.0" step="0.1" name="level" value="1.0" size="10" onchange="setup()"></td><td><div name="levellabel">1.0</div></td></tr>
+      <tr><td>Attack</td><td>
+	<input type="range" min="0.0" max="1.0" step="0.1" name="attack" value="0.0" size="10" onchange="setup()"></td><td><div name="attacklabel">0.0</div></td></tr>
+      <tr><td>Decay</td><td>
+	<input type="range" min="0.0" max="1.0" step="0.1" name="decay" value="1.0" size="10" onchange="setup()"></td><td><div name="decaylabel">1.0</div></td></tr>
+      <tr><td>Sustain</td><td>
+	<input type="range" min="0.0" max="1.0" step="0.1" name="sustain" value="0.5" size="10" onchange="setup()"></td><td><div name="sustainlabel">0.5</div></td></tr>
+      <tr><td>Release</td><td>
+	<input type="range" min="0.0" max="1.0" step="0.1" name="release" value="1.0" size="10" onchange="setup()"></td><td><div name="releaselabel">1.0</div></td></tr>
+    </table>
+
+    <br>
+    <button onclick="keyOn()">KeyOn</button>
+    <button oncluck="keyOff()">KeyOff</button>
+  </body>
+
+  <script type="text/javascript">
+   let setup = () => {
+       document.getElementsByName("freqlabel")[0].innerHTML = parseFloat(document.getElementsByName("freq")[0].value);
+       document.getElementsByName("ffreqlabel")[0].innerHTML = parseFloat(document.getElementsByName("ffreq")[0].value);
+       document.getElementsByName("levellabel")[0].innerHTML = parseFloat(document.getElementsByName("level")[0].value);
+       document.getElementsByName("attacklabel")[0].innerHTML = parseFloat(document.getElementsByName("attack")[0].value);
+       document.getElementsByName("decaylabel")[0].innerHTML = parseFloat(document.getElementsByName("decay")[0].value);
+       document.getElementsByName("sustainlabel")[0].innerHTML = parseFloat(document.getElementsByName("sustain")[0].value);
+       document.getElementsByName("releaselabel")[0].innerHTML = parseFloat(document.getElementsByName("release")[0].value);
+   }
+
+   let keyOn = () => {
+       setup();
+   }
+
+   let keyOff = () => {
+   }
+
+
+  </script>
+</html>
