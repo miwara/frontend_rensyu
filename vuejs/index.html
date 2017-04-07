@@ -48,5 +48,15 @@
       <button v-on:click="down">down</button>
     </div>
     <script src="js/count.js"></script>
+
+    <h2>Todo</h2>
+    <div id="todo">
+      <input v-model="newTodo">
+      <button v-on:click="create">add Todo</button>
+      <ol>
+	<todo-item v-for="todo in todos" v-bind:todo="todo"></todo-item>
+      </ol>
+    </div>
+    <script src="js/todo.js"></script>
   </body>
 </html>
