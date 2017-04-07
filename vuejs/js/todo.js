@@ -1,20 +1,19 @@
 'use strict';
 
-Vue.component('todo-item', {
-  props: ['todo'],
-  template: '<li>{{ todo.text }}</li>'
-});
-
 let todo = new Vue({
   el: '#todo',
   data: {
     newTodo: "",
-    todos: []
+    todos: [],
+    checkedTodo: []
   },
   methods: {
     create: function (e) {
       e.preventDefault();
       this.todos.push({text: this.newTodo});
+    },
+    deleteTodo: function (todo) {
+      this.todos.splice(this.todos.indexOf(todo), 1);
     }
   }
 });
