@@ -50,3 +50,11 @@ let app6 = new Vue({
     message: 'Hello Vue!'
   }
 });
+
+Vue.component('todo-item', {
+  template: '<li>This is a todo</li>'
+})
+
+let app7 = new Vue({
+  el: '#app-7'
+});
