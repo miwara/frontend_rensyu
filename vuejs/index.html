@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Vue.js</title>
+  </head>
+  <body>
+    <h1>Vue.js</h1>
+    <script src="node_modules/vue/dist/vue.js"></script>
+    <div id="app">
+      {{ message }}
+    </div>
+    <div id="app-2">
+      <span v-bind:title="message">
+	Hover your mouse over me for a few seconds
+	to see my dynamically boud title!
+      </span>
+    </div>
+    <div id="app-3">
+      <p v-if="seen">Now you see me</p>
+    </div>
+    <div id="app-4">
+      <ol>
+	<li v-for="todo in todos">
+	  {{ todo.text }}
+	</li>
+      </ol>
+    </div>
+    <div id="app-5">
+      <p>{{ message }}</p>
+      <button v-on:click="reverseMessage">Reverse Message</button>
+    </div>
+    <div id="app-6">
+      <p>{{ message }}</p>
+      <input v-model="message">
+    </div>
+    <div id="app-7">
+      <ol>
+	<todo-item v-for="item in grocerylist" v-bind:todo="item"></todo-item>
+      </ol>
+    </div>
+    <script src="js/app.js"></script>
+
+    <h2>Count Up</h2>
+    <div id="count">
+      <p>{{ count }}</p>
+      <button v-on:click="up">up</button>
+      <button v-on:click="down">down</button>
+    </div>
+    <script src="js/count.js"></script>
+
+    <h2>Todo</h2>
+    <div id="todo">
+      <input v-model="newTodo">
+      <button v-on:click="create">add Todo</button>
+      <table>
+	<tr v-for="todo in todos">
+	  <td>{{ todo.text }}</td>
+	  <td><button v-on:click="deleteTodo">delete Todo</button></td>
+	</tr>
+      </table>
+    </div>
+    <script src="js/todo.js"></script>
+  </body>
+</html>
