@@ -36,7 +36,7 @@
     </div>
     <div id="app-7">
       <ol>
-	<todo-item></todo-item>
+	<todo-item v-for="item in grocerylist" v-bind:todo="item"></todo-item>
       </ol>
     </div>
     <script src="js/app.js"></script>
